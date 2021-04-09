@@ -7,8 +7,11 @@ class TestRoom(unittest.TestCase):
 
     def setUp(self):
         self.nine_in_nails_fanboy_room = Room("Nine Inch Nails fanboy room", 2, 10)
+        self.the_country_room = Room("The Country Room", 1, 10)
         self.mark = Guest("Mark", 33, 100, "Closer")
         self.dan = Guest("Dan", 34, 100, "The Fragile" )
+
+        #tests for instance variables/format is correct
 
     def test_room_has_name(self):
         self.assertEqual("Nine Inch Nails fanboy room", self.nine_in_nails_fanboy_room.name)
@@ -22,24 +25,33 @@ class TestRoom(unittest.TestCase):
     def test_room_has_cost(self):
         self.assertEqual(10, self.nine_in_nails_fanboy_room.cost)
 
+        #tests for methods
+
     def test_room_can_check_in(self):
-        self.nine_in_nails_fanboy_room.check_in(self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.mark)
         self.assertEqual(1, len(self.nine_in_nails_fanboy_room.occupants))
 
     def test_room_can_check_out_guests(self):
-        self.nine_in_nails_fanboy_room.check_in(self.mark)
-        self.nine_in_nails_fanboy_room.check_out(self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room, self.mark)
+        self.nine_in_nails_fanboy_room.check_out(self.nine_in_nails_fanboy_room, self.mark)
         self.assertEqual(0, len(self.nine_in_nails_fanboy_room.occupants))
 
     def test_room_cannot_check_out_guest_thats_not_there(self):
-        self.nine_in_nails_fanboy_room.check_in(self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.mark)
         self.assertEqual("Dan is not in this room, nobody has been checked out.", 
-        self.nine_in_nails_fanboy_room.check_out(self.dan))
+        self.nine_in_nails_fanboy_room.check_out(self.nine_in_nails_fanboy_room,self.dan))
 
-    def test_room_cannot_surpass_capacity(self):
+    def test_room_cannot_surpass_capacity_NIN_room(self):
         self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
-        self.nine_in_nails_fanboy_room.check_in(self.mark)
-        self.nine_in_nails_fanboy_room.check_in(self.sarah)
-        self.nine_in_nails_fanboy_room.check_in(self.dan)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.dan)
         self.assertEqual("Sorry, this room is at capacity as there are only 2 NIN fanboys allowed",
-        self.nine_in_nails_fanboy_room.check_in(self.sarah))
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.sarah))
+
+    # tests for multiple rooms 
+
+    def test_nonNIN_room_cannot_surpass_capacity(self):
+        self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
+        self.the_country_room.check_in(self.the_country_room,self.sarah)
+        self.assertEqual("I'm sorry, this room is at capacity. You can't come in",
+        self.the_country_room.check_in(self.the_country_room, self.mark))
