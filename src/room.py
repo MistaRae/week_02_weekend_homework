@@ -9,7 +9,9 @@ class Room:
     
     #room has capacity so the room controls check-in and and check-out
     def check_in(self, guest):
-        self.occupants.append(guest)
+        if len(self.occupants) < self.capacity:
+            self.occupants.append(guest)
+        return "Sorry, this room is at capacity as there are only 2 NIN fanboys allowed"
 
     def check_out(self, guest):
         if guest in self.occupants:

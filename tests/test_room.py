@@ -33,4 +33,13 @@ class TestRoom(unittest.TestCase):
 
     def test_room_cannot_check_out_guest_thats_not_there(self):
         self.nine_in_nails_fanboy_room.check_in(self.mark)
-        self.assertEqual("Dan is not in this room, nobody has been checked out.", self.nine_in_nails_fanboy_room.check_out(self.dan))
+        self.assertEqual("Dan is not in this room, nobody has been checked out.", 
+        self.nine_in_nails_fanboy_room.check_out(self.dan))
+
+    def test_room_cannot_surpass_capacity(self):
+        self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
+        self.nine_in_nails_fanboy_room.check_in(self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.sarah)
+        self.nine_in_nails_fanboy_room.check_in(self.dan)
+        self.assertEqual("Sorry, this room is at capacity as there are only 2 NIN fanboys allowed",
+        self.nine_in_nails_fanboy_room.check_in(self.sarah))
