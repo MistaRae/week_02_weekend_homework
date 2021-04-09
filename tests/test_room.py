@@ -2,6 +2,7 @@ import unittest
 from src.room import Room
 from src.guest import Guest
 from src.song import Song
+import pdb
 
 class TestRoom(unittest.TestCase):
 
@@ -12,6 +13,8 @@ class TestRoom(unittest.TestCase):
         self.dan = Guest("Dan", 34, 100, "The Fragile")
         self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
         self.closer = Song("Closer")
+        self.the_fragile = Song("The Fragile")
+        self.drunk_like_me = Song("Drunk like me")
 
         #tests for instance variables/format is correct
 
@@ -59,5 +62,14 @@ class TestRoom(unittest.TestCase):
     # test adding songs to rooms 
 
     def test_add_song_to_room(self):
-        self.nine_in_nails_fanboy_room.add_song(self.closer)
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
         self.assertEqual(1, len(self.nine_in_nails_fanboy_room.tracklist))
+
+    def test_whats_playing(self):
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
+        self.assertEqual("Closer", self.nine_in_nails_fanboy_room.tracklist[-1].name)
+
+    def test_whats_playing_with_larger_tracklist(self):
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.the_fragile)
+        self.assertEqual("The Fragile", self.nine_in_nails_fanboy_room.tracklist[-1].name)
