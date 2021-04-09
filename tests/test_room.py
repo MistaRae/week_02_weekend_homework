@@ -73,3 +73,18 @@ class TestRoom(unittest.TestCase):
         self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
         self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.the_fragile)
         self.assertEqual("The Fragile", self.nine_in_nails_fanboy_room.tracklist[-1].name)
+
+    def test_people_react_to_favourite_song_playing(self):
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room, self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room, self.dan)
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.the_fragile)
+        self.assertEqual("Dan: WHOOP!", self.nine_in_nails_fanboy_room.favourite_song_playing(self.nine_in_nails_fanboy_room))
+
+    def test_display_tracklist(self):
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room, self.mark)
+        self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room, self.dan)
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
+        self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.the_fragile)
+        self.assertEqual(["Closer", "The Fragile"],
+            self.nine_in_nails_fanboy_room.display_tracklist(self.nine_in_nails_fanboy_room) )

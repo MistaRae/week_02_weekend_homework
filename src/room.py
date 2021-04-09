@@ -29,3 +29,12 @@ class Room:
     def whats_playing(self, room):
         return room.tracklist[-1].name
         
+    def favourite_song_playing(self,room):
+        #if current a current guest favourite song is playing
+        #return string
+        for guest in room.occupants:
+            if guest.fav_song == self.whats_playing(room):
+                return f"{guest.name}: WHOOP!"
+
+    def display_tracklist(self, room):
+        return room.tracklist
