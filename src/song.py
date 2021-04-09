@@ -1,0 +1,1 @@
+#define Song class
