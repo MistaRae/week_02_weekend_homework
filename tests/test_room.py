@@ -9,7 +9,9 @@ class TestRoom(unittest.TestCase):
         self.nine_in_nails_fanboy_room = Room("Nine Inch Nails fanboy room", 2, 10)
         self.the_country_room = Room("The Country Room", 1, 10)
         self.mark = Guest("Mark", 33, 100, "Closer")
-        self.dan = Guest("Dan", 34, 100, "The Fragile" )
+        self.dan = Guest("Dan", 34, 100, "The Fragile")
+        self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
+        self.closer = Song("Closer")
 
         #tests for instance variables/format is correct
 
@@ -42,7 +44,6 @@ class TestRoom(unittest.TestCase):
         self.nine_in_nails_fanboy_room.check_out(self.nine_in_nails_fanboy_room,self.dan))
 
     def test_room_cannot_surpass_capacity_NIN_room(self):
-        self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
         self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.mark)
         self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room,self.dan)
         self.assertEqual("Sorry, this room is at capacity as there are only 2 NIN fanboys allowed",
@@ -51,7 +52,12 @@ class TestRoom(unittest.TestCase):
     # tests for multiple rooms 
 
     def test_nonNIN_room_cannot_surpass_capacity(self):
-        self.sarah = Guest("Sarah", 28, 50, "Drunk like me")
         self.the_country_room.check_in(self.the_country_room,self.sarah)
         self.assertEqual("I'm sorry, this room is at capacity. You can't come in",
         self.the_country_room.check_in(self.the_country_room, self.mark))
+
+    # test adding songs to rooms 
+
+    def test_add_song_to_room(self):
+        self.nine_in_nails_fanboy_room.add_song(self.closer)
+        self.assertEqual(1, len(self.nine_in_nails_fanboy_room.tracklist))

@@ -6,7 +6,7 @@ class Room:
         self.capacity = capacity #for check to make sure there is space in the room for 'x' guests or 'n' of guests
         self.cost = cost #cost to hire/entrance cost 
         self.occupants = []  #stores current occupants and checks against capacity to prevent too many people being in a room. 
-    
+        self.tracklist = []  #stores the songs played in order from first played to most recently played/added
     #room has capacity so the room controls check-in and and check-out
     def check_in(self, room, guest):
         if room.name == "Nine Inch Nails fanboy room":
@@ -18,7 +18,9 @@ class Room:
         return "I'm sorry, this room is at capacity. You can't come in"
 
     def check_out(self, room, guest):
-        
         if guest in room.occupants:
             self.occupants.remove(guest)
         return f"{guest.name} is not in this room, nobody has been checked out."
+
+    def add_song(room, song):
+        room.tracklist.append(song)
