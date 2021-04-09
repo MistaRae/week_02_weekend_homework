@@ -4,3 +4,7 @@ class Song:
     def __init__(self, name):
         self.name = name
 #for tracking playlists and favourites 
+#can also include:
+#artist
+#genre
+#length

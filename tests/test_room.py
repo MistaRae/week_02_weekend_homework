@@ -86,5 +86,12 @@ class TestRoom(unittest.TestCase):
         self.nine_in_nails_fanboy_room.check_in(self.nine_in_nails_fanboy_room, self.dan)
         self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.closer)
         self.nine_in_nails_fanboy_room.add_song(self.nine_in_nails_fanboy_room, self.the_fragile)
-        self.assertEqual(["Closer", "The Fragile"],
-            self.nine_in_nails_fanboy_room.display_tracklist(self.nine_in_nails_fanboy_room) )
+        self.assertEqual([self.closer, self.the_fragile],
+            self.nine_in_nails_fanboy_room.display_tracklist(self.nine_in_nails_fanboy_room))
+
+    def test_room_till_starts_at_0(self):
+        self.assertEqual(0, self.nine_in_nails_fanboy_room.till)
+
+    def test_entry_fee_moved_to_room_till(self):
+        self.nine_in_nails_fanboy_room.charge_entry_fee(self.mark, self.nine_in_nails_fanboy_room)
+        self.assertEqual(10, self.nine_in_nails_fanboy_room.till)

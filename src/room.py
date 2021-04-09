@@ -7,7 +7,8 @@ class Room:
         self.cost = cost #cost to hire/entrance cost 
         self.occupants = []  #stores current occupants and checks against capacity to prevent too many people being in a room. 
         self.tracklist = []  #stores the songs played in order from first played to most recently played/added
-   
+        self.till = 0
+
     #room has capacity so the room controls check-in and and check-out
     def check_in(self, room, guest):
         if room.name == "Nine Inch Nails fanboy room":
@@ -38,3 +39,6 @@ class Room:
 
     def display_tracklist(self, room):
         return room.tracklist
+
+    def charge_entry_fee(self, guest, room):
+        self.till += room.cost
