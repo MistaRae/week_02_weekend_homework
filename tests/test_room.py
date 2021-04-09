@@ -25,3 +25,12 @@ class TestRoom(unittest.TestCase):
     def test_room_can_check_in(self):
         self.nine_in_nails_fanboy_room.check_in(self.mark)
         self.assertEqual(1, len(self.nine_in_nails_fanboy_room.occupants))
+
+    def test_room_can_check_out_guests(self):
+        self.nine_in_nails_fanboy_room.check_in(self.mark)
+        self.nine_in_nails_fanboy_room.check_out(self.mark)
+        self.assertEqual(0, len(self.nine_in_nails_fanboy_room.occupants))
+
+    # def test_room_cannot_check_out_guest_thats_not_there(self):
+    #     self.nine_in_nails_fanboy_room.check_out(self.dan)
+    #     self.assertEqual("Dan is not in this room, nobody has been checked out", )
